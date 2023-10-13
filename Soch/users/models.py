@@ -43,7 +43,7 @@ class User(AbstractUser):
     )
 
     email = models.EmailField(unique=True)
-    username = models.CharField(unique=True, max_length=255)
+    username = models.CharField(max_length=255)
     first_name = models.CharField(max_length=55)
     last_name = models.CharField(max_length=55)    
     profile_pic = models.ImageField(upload_to="static/users", blank=True, null=True)
