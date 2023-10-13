@@ -32,12 +32,12 @@
       input[type="text"],
       input[type="email"],
       input[type="password"] {
-        width: 100%;
+        width: 90%;
         padding: 10px;
         margin: 5px 0;
         border: 1px solid #ccc;
-        border-radius: 3px;
-        font-size: 16px;
+        border-radius: 10px;
+        font-size: 20px;
       }
       
       button {
@@ -60,14 +60,14 @@
   <div class="form-container">
     <h2>Login</h2>
     <form action="#" method="POST">
-        {% csrf_token %}
+    {% csrf_token %}
       <label for="username">Username:</label>
       <input type="text" id="username" name="username" required>
       <label for="password">Password:</label>
       <input type="password" id="password" name="loginpassword" required>
       <button type="submit" style='margin-bottom:1em'>Login</button>
-      <button type="submit">Signup</button>
     </form>
+  <a href="signup"><button type="submit">Signup</button></a>
   </div>
 </body>
 </html>
