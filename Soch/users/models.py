@@ -11,6 +11,7 @@ class UserManager(BaseUserManager):
         """
         if not email:
             raise ValueError("The given email must be set")
+        
         email = self.normalize_email(email)
         user = self.model(email=email, **extra_fields)
         user.set_password(password)
@@ -43,7 +44,9 @@ class User(AbstractUser):
 
     email = models.EmailField(unique=True)
     username = models.CharField(unique=True, max_length=255)
-    profile_pic = models.ImageField(upload_to="image/users", blank=True, null=True)
+    first_name = models.CharField(max_length=55)
+    last_name = models.CharField(max_length=55)    
+    profile_pic = models.ImageField(upload_to="static/users", blank=True, null=True)
     phone = models.CharField(max_length=10, unique=True, blank=True, null=True)
     address = models.CharField(max_length=100, blank=True, null=True)
     gender = models.CharField(
