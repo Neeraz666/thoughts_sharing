@@ -13,9 +13,6 @@ def signuppage(request):
     return render(request, "User/signup.html")
 
 
-from django.http import HttpResponse
-
-
 def handlelogin(request):
     if request.method == "POST":
         email = request.POST.get("email")
