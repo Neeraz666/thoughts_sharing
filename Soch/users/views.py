@@ -24,7 +24,7 @@ def handlelogin(request):
         if user:
             login(request, user)
             messages.success(request, f"Hi {user.username.title()}, welcome back!")
-            return redirect("home")
+            return render(request, "home")
     else:
         return HttpResponse("This view only accepts POST requests.")
 
@@ -55,11 +55,11 @@ def handlesignup(request):
             messages.error(request, "Your passwords dont match. Please try again.")
             return redirect("signup")
 
-        messages.success('Thank you! Your Soch account has been created, please Login to continue.')
         user = User.objects.create_user(email, password1)
         user.save()
-        login(request, user)
-        return redirect("home")
+        # login(request, user)
+        # messages.success('Thank you! Your Soch account has been created, please Login to continue.')
+        return redirect("/login")
 
     else:
         messages.error('Something went wrong. Please fill it carefully.')
