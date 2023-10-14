@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect, HttpResponse
 from .models import *
 from django.contrib import messages
 from django.contrib.auth import authenticate, login
-
+from django.contrib.auth.hashers import make_password
 
 # Create your views here.
 def loginpage(request):
@@ -24,7 +24,10 @@ def handlelogin(request):
         if user:
             login(request, user)
             messages.success(request, f"Hi {user.username.title()}, welcome back!")
-            return redirect("home")
+            return redirect("/home")
+        else:
+            messages.error(request, "Invalid email or password. Please try again.")
+            return redirect("/login")
     else:
         return HttpResponse("This view only accepts POST requests.")
 
@@ -37,7 +40,7 @@ def handlesignup(request):
         last_name = request.POST.get("last_name")
         password1 = request.POST.get("password1")
         password2 = request.POST.get("password2")
-        profile_pic = request.POST.get("profile_pic")
+        profile_pic = request.FILES.get("profile_pic")
         gender = request.POST.get("gender")
         dob = request.POST.get("dob")
         phone = request.POST.get("phone")
@@ -55,11 +58,20 @@ def handlesignup(request):
             messages.error(request, "Your passwords dont match. Please try again.")
             return redirect("signup")
 
-        messages.success('Thank you! Your Soch account has been created, please Login to continue.')
-        user = User.objects.create_user(email, password1)
+        user = User.objects.create_user(email=email, username=username)
+        user.first_name = first_name
+        user.last_name = last_name
+        user.profile_pic = profile_pic
+        user.gender = gender
+        user.dob = dob
+        user.phone = phone
+        user.address = address
+
+        user.password = make_password(password1)
         user.save()
-        login(request, user)
-        return redirect("home")
+        # login(request, user)
+        messages.success(request, 'Thank you! Your Soch account has been created, please Login to continue.')
+        return redirect("/login")
 
     else:
         messages.error('Something went wrong. Please fill it carefully.')
