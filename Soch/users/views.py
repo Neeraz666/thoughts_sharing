@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect, HttpResponse
 from .models import *
 from django.contrib import messages
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.hashers import make_password
 
 # Create your views here.
@@ -13,20 +13,6 @@ def signuppage(request):
     return render(request, "User/signup.html")
 
 
-def handlelogin(request):
-    if request.method == "POST":
-        email = request.POST.get("email")
-        password = request.POST.get("password")
-        user = authenticate(request, email=email, password=password)
-        if user:
-            login(request, user)
-            messages.success(request, f"Hi {user.username.title()}, welcome back!")
-            return redirect("/home")
-        else:
-            messages.error(request, "Invalid email or password. Please try again.")
-            return redirect("/login")
-    else:
-        return HttpResponse("This view only accepts POST requests.")
 
 
 def handlesignup(request):
@@ -73,3 +59,24 @@ def handlesignup(request):
     else:
         messages.error('Something went wrong. Please fill it carefully.')
         return redirect('signup')
+
+
+def handlelogin(request):
+    if request.method == "POST":
+        email = request.POST.get("email")
+        password = request.POST.get("password")
+        user = authenticate(request, email=email, password=password)
+        if user:
+            login(request, user)
+            messages.success(request, f"Hi {user.username.title()}, welcome back!")
+            return redirect("/home")
+        else:
+            messages.error(request, "Invalid email or password. Please try again.")
+            return redirect("/login")
+    else:
+        return HttpResponse("This view only accepts POST requests.")
+    
+
+def handlelogout(request):
+    logout(request)
+    return redirect("/login")
