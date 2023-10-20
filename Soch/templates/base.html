@@ -35,12 +35,28 @@
             color: #f1f1f1;
         }
 
-        .sidenav img{
-            max-width: 30%;
+        #navlist{
+            margin-top: 3em;
         }
 
+        #profilephoto {
+            text-align: center;
+            width: 100%;
+        }
+
+        #profilephoto img{
+            max-width: 50%;
+            border-radius: 100%;
+            margin: 0 auto;
+            padding: 2px;
+        }
+
+        #profilephoto p{
+            text-align: center;
+        }    
+
         #logout {
-            margin-top: 26em;
+            margin-top: 6em;
         }
 
         /* Style page content */
@@ -64,11 +80,18 @@
 
 <body>
     <div id="mySidenav" class="sidenav">
-        <a href="#"><img src="{{user.profile_pic.url}}" alt=""></a><p>{{user.username}}</p>
-        <a href="#">Home</a>
-        <a href="#">Notifications</a>
-        <a href="#">Account</a>
-        <a href="#">Contact</a>
+        <div id="profilephoto">
+            <a href="#">
+                <img src="{{user.profile_pic.url}}" alt="">
+                <p>{{user.username}}</p>
+            </a>    
+        </div>
+        <div id = 'navlist'>
+            <a href="#">Home</a>
+            <a href="#">Notifications</a>
+            <a href="#">Account</a>
+            <a href="#">Contact</a>
+        </div>
         <div id="logout">
             <a href="/handlelogout">
                 <h4>Logout</h4>
