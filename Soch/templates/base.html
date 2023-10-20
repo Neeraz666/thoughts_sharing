@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %} {% endblock %}</title>
+    <style>
+        /* The side navigation menu */
+        .sidenav {
+            height: 100%;
+            width: 250px; /* Set the initial width to your desired value */
+            position: fixed;
+            z-index: 1;
+            top: 0;
+            left: 0;
+            background-color: #111;
+            overflow-x: hidden;
+            padding-top: 60px;
+            transition: 0.5s;
+        }
+
+        /* The navigation menu links */
+        .sidenav a {
+            padding: 8px 16px 16px 32px;
+            text-decoration: none;
+            font-size: 25px;
+            color: #818181;
+            display: block;
+            transition: 0.3s;
+        }
+
+        /* When you mouse over the navigation links, change their color */
+        .sidenav a:hover {
+            color: #f1f1f1;
+        }
+
+        #navlist{
+            margin-top: 3em;
+        }
+
+        #profilephoto {
+            text-align: center;
+            width: 100%;
+        }
+
+        #profilephoto img{
+            max-width: 50%;
+            border-radius: 100%;
+            margin: 0 auto;
+            padding: 2px;
+        }
+
+        #profilephoto p{
+            text-align: center;
+        }    
+
+        #logout {
+            margin-top: 6em;
+        }
+
+        /* Style page content */
+        #main {
+            margin-left: 250px; /* Adjust this value to match the sidenav width */
+            padding: 20px;
+        }
+
+        /* On smaller screens, where height is less than 450px, change the style of the sidenav */
+        @media screen and (max-height: 450px) {
+            .sidenav {
+                padding-top: 15px;
+            }
+            .sidenav a {
+                font-size: 18px;
+            }
+        }
+    </style>
+
+</head>
+
+<body>
+    <div id="mySidenav" class="sidenav">
+        <div id="profilephoto">
+            <a href="#">
+                <img src="{{user.profile_pic.url}}" alt="">
+                <p>{{user.username}}</p>
+            </a>    
+        </div>
+        <div id = 'navlist'>
+            <a href="#">Home</a>
+            <a href="#">Notifications</a>
+            <a href="#">Account</a>
+            <a href="#">Contact</a>
+        </div>
+        <div id="logout">
+            <a href="/handlelogout">
+                <h4>Logout</h4>
+            </a>
+        </div>
+    </div>
+
+    <!-- Add all page content inside this div if you want the side nav to push page content to the right -->
+    {% block body %}
+    {% endblock %}
+</body>
+
+</html>
