@@ -1,14 +1,80 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Home</title>
-</head>
-<body>
-    <h1>Hello {{user.username}}. Welcome to Homepage.</h1>
+    <style>
+        /* The side navigation menu */
+        .sidenav {
+            height: 100%;
+            width: 250px; /* Set the initial width to your desired value */
+            position: fixed;
+            z-index: 1;
+            top: 0;
+            left: 0;
+            background-color: #111;
+            overflow-x: hidden;
+            padding-top: 60px;
+            transition: 0.5s;
+        }
 
-    <a href="/handlelogout"><h3>Logout</h3></a>
-    
+        /* The navigation menu links */
+        .sidenav a {
+            padding: 8px 16px 16px 32px;
+            text-decoration: none;
+            font-size: 25px;
+            color: #818181;
+            display: block;
+            transition: 0.3s;
+        }
+
+        /* When you mouse over the navigation links, change their color */
+        .sidenav a:hover {
+            color: #f1f1f1;
+        }
+
+        #logout {
+            margin-top: 26em;
+        }
+
+        /* Style page content */
+        #main {
+            margin-left: 250px; /* Adjust this value to match the sidenav width */
+            padding: 20px;
+        }
+
+        /* On smaller screens, where height is less than 450px, change the style of the sidenav */
+        @media screen and (max-height: 450px) {
+            .sidenav {
+                padding-top: 15px;
+            }
+            .sidenav a {
+                font-size: 18px;
+            }
+        }
+    </style>
+
+</head>
+
+<body>
+    <div id="mySidenav" class="sidenav">
+        <a href="#">About</a>
+        <a href="#">Services</a>
+        <a href="#">Clients</a>
+        <a href="#">Contact</a>
+        <div id="logout">
+            <a href="/handlelogout">
+                <h4>Logout</h4>
+            </a>
+        </div>
+    </div>
+
+    <!-- Add all page content inside this div if you want the side nav to push page content to the right -->
+    <div id="main">
+        <h1>Hello {{user.username}}. Welcome to Homepage.</h1>
+    </div>
 </body>
+
 </html>
